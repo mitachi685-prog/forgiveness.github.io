@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry, My Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Montserrat:wght@200;300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose: #d4708a;
+      --blush: #f5dde4;
+      --deep: #3b1f2b;
+      --cream: #fff8f5;
+      --gold: #d4a76a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    #floaties {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .floatie {
+      position: absolute; bottom: -60px;
+      animation: float-up linear infinite; opacity: 0;
+    }
+    @keyframes float-up {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    main {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 3rem 1.2rem 6rem; gap: 2.2rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1.5px solid var(--blush);
+      border-radius: 20px;
+      max-width: 640px; width: 100%;
+      padding: 3.5rem 3rem;
+      position: relative;
+      box-shadow: 0 8px 40px rgba(212,112,138,0.10), 0 2px 8px rgba(212,112,138,0.06);
+      animation: rise 1.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .card:nth-child(2) { animation-delay: .15s; }
+    @keyframes rise {
+      from { opacity:0; transform:translateY(30px) scale(0.97); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+    .card::before {
+      content: '🎀';
+      position: absolute; top: -18px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem; line-height: 1;
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 1.6rem 0; opacity: 0.35;
+    }
+    .divider-line { flex:1; height:1px; background:var(--rose); }
+
+    .eyebrow {
+      font-family: 'Montserrat', sans-serif; font-weight: 200;
+      font-size: 0.68rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--rose); text-align: center;
+    }
+    .title {
+      font-size: clamp(2.4rem,6vw,3.8rem); font-weight: 300; font-style: italic;
+      text-align: center; color: var(--deep); margin: .5rem 0 0; line-height: 1.15;
+    }
+    .title em { color: var(--rose); }
+    .body-p {
+      font-size: 1.15rem; font-weight: 300; line-height: 1.95; color: #6b3f52;
+    }
+    .body-p + .body-p { margin-top: 1.1rem; }
+
+    .emoji-row {
+      text-align: center; font-size: 2.4rem; margin-bottom: 1.6rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    .sig { margin-top: 2.2rem; text-align: right; }
+    .sig-label {
+      font-family: 'Montserrat', sans-serif; font-size: 0.6rem;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--gold); opacity:.8;
+    }
+    .sig-name {
+      font-family: 'Dancing Script', cursive; font-size: 2.4rem;
+      color: var(--rose); line-height: 1.2; margin-top: .15rem;
+    }
+
+    .sec-title {
+      font-size: 1.7rem; font-weight: 300; font-style: italic;
+      color: var(--deep); text-align: center; margin-bottom: 1.4rem;
+    }
+    .sec-title em { color: var(--rose); }
+
+    #typewriter {
+      font-size: 1.12rem; font-weight: 300; line-height: 1.9; color: #6b3f52;
+      min-height: 4rem; font-style: italic; border-left: 3px solid var(--blush);
+      padding-left: 1.2rem; margin: 1.2rem 0;
+    }
+    #cursor {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: var(--rose); margin-left: 2px;
+      animation: blink .8s ease-in-out infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+    .typewriter-btn {
+      background: transparent; border: 1.5px solid var(--rose);
+      border-radius: 50px; color: var(--rose);
+      font-family: 'Montserrat', sans-serif; font-size: .7rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      padding: .6rem 1.8rem; cursor: pointer;
+      transition: all .3s ease; display: block; margin: 1rem auto 0;
+    }
+    .typewriter-btn:hover { background: var(--rose); color: #fff; }
+
+    .footnote {
+      font-family: 'Dancing Script', cursive; font-size: 1.3rem;
+      color: var(--rose); opacity: .55; text-align: center;
+    }
+
+    @media (max-width: 500px) {
+      .card { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="floaties"></div>
+
+<main>
+
+  <!-- The Letter -->
+  <div class="card">
+    <div class="emoji-row">🌸💕🌸</div>
+    <p class="eyebrow">a letter from my heart</p>
+    <h1 class="title">I am <em>so</em> sorry, my love.</h1>
+    <div class="divider"><div class="divider-line"></div><span>💗</span><div class="divider-line"></div></div>
+    <p class="body-p">My love, I know that sorry is just a word — and words alone cannot heal what my actions broke. But I need you to feel, from the very deepest place inside me, how truly, genuinely sorry I am.</p>
+    <p class="body-p">You deserve a partner who makes you feel safe, cherished, and completely at peace. I failed to be that for you, and I carry that with a heaviness I cannot set down.</p>
+    <p class="body-p">You are the most beautiful part of my life — your laugh, your patience, the way you love so fiercely. I do not take a single moment of you for granted. I am asking not just for forgiveness, but for the chance to be the husband you deserve.</p>
+    <p class="body-p">I love you. Yesterday, today, always.</p>
+    <div class="divider"><div class="divider-line"></div><span>💗</span><div class="divider-line"></div></div>
+    <div class="sig">
+      <div class="sig-label">Forever yours</div>
+      <div class="sig-name">Munif Mubtashim 💌</div>
+    </div>
+  </div>
+
+  <!-- Little Things Typewriter -->
+  <div class="card">
+    <div class="emoji-row">💌🖊️</div>
+    <h2 class="sec-title">Little things I <em>never stop</em> thinking about you</h2>
+    <div class="divider"><div class="divider-line"></div><span>🌷</span><div class="divider-line"></div></div>
+    <div id="typewriter"><span id="tw-text"></span><span id="cursor"></span></div>
+    <button class="typewriter-btn" id="twBtn">next note 💕</button>
+  </div>
+
+  <p class="footnote">with every piece of my heart 💗</p>
+
+</main>
+
+<script>
+  const floatContainer = document.getElementById('floaties');
+  const floatEmojis = ['💗','🌸','✨','💕','🌺','⭐','🦋','🌷','💫','🌼'];
+  for (let i = 0; i < 25; i++) {
+    const el = document.createElement('div');
+    el.className = 'floatie';
+    el.textContent = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+    el.style.cssText = `
+      left: ${Math.random()*100}%;
+      font-size: ${Math.random()*1.2+0.8}rem;
+      animation-duration: ${Math.random()*10+8}s;
+      animation-delay: ${Math.random()*12}s;
+    `;
+    floatContainer.appendChild(el);
+  }
+
+  const notes = [
+    "You are the reason my life feels so happy.",
+    "The way you smile when you don't know I'm watching — I could live in that moment forever.",
+    "I am so proud of everything you are and everything you carry so gracefully.",
+    "You make ordinary days feel extraordinary just by being in them.",
+    "Your heart is the most beautiful thing I have ever been trusted with.",
+    "I choose you. Again and again. Every single day.",
+    "Loving you is the best thing I have ever done.",
+    "You deserve a love that never makes you feel small. I am learning to be that love.",
+    "In every version of my life, I would always find my way back to you.",
+  ];
+  let noteIdx = 0, charIdx = 0, typing = true;
+  const twEl = document.getElementById('tw-text');
+
+  function type() {
+    const note = notes[noteIdx];
+    if (typing && charIdx < note.length) {
+      twEl.textContent = note.slice(0, ++charIdx);
+      setTimeout(type, 38);
+    }
+  }
+
+  document.getElementById('twBtn').addEventListener('click', function() {
+    noteIdx = (noteIdx + 1) % notes.length;
+    charIdx = 0; typing = true;
+    twEl.textContent = '';
+    type();
+  });
+  type();
+</script>
+
+</body>
+</html>
